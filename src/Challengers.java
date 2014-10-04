@@ -20,27 +20,15 @@ import sun.misc.JavaIOAccess;
 public class Challengers {
 
     public static void main (String args[]) {
-        Collection<JsonObject> collections = new ArrayList<JsonObject>();
-        getChallengerNA(collections);
-        //getChallengerEUW(collections);
-        //getChallengerKR(collections);
-
-
-        try {
-            FileWriter outFile = new FileWriter("./challengers.json");
-            outFile.write(collections.toArray().toString());
-
-        } catch (IOException e) {
-            System.out.println("SPEL:ING OS HJAD") ;
-        }
-
-        System.out.println(collections);
     }
 
-    public static void getChallengerNA(Collection<JsonObject> collections) {
+    public static void getChallengerNA() {
+
+        Collection<JsonObject> collections = new ArrayList<JsonObject>();
 
         RiotApi api = new RiotApi("9b269c05-00ea-46ec-88c0-3a6c7dc88057");
         League challengers = null;
+
         try {
             challengers = api.getChallengerLeagues(Region.NA, QueueType.RANKED_SOLO_5x5);
         } catch (RiotApiException e) {
@@ -52,10 +40,19 @@ public class Challengers {
             JsonObject playerID = new JsonObject();
             playerID.addProperty("play id: ", playerIDorTeam);
             collections.add((playerID));
-            //System.out.println(playerID);
         }
+
+        try {
+            FileWriter outFile = new FileWriter("./challengers.json");
+            outFile.write(collections.toArray().toString());
+        } catch (IOException e) {
+            System.out.println("SPEL:ING OS HJAD") ;
+        }
+
+        //System.out.println(collections);
     }
 
+    /*
 
     public static void getChallengerEUW(Collection<JsonObject> collections) {
 
@@ -95,4 +92,6 @@ public class Challengers {
             //System.out.println(playerID);
         }
     }
+
+    */
 }
