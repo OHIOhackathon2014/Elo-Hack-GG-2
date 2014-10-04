@@ -22,8 +22,8 @@ public class Challengers {
     public static void main (String args[]) {
         Collection<JsonObject> collections = new ArrayList<JsonObject>();
         getChallengerNA(collections);
-        getChallengerEUW(collections);
-        getChallengerKR(collections);
+        //getChallengerEUW(collections);
+        //getChallengerKR(collections);
 
 
         try {
@@ -60,11 +60,12 @@ public class Challengers {
     public static void getChallengerEUW(Collection<JsonObject> collections) {
 
         RiotApi api = new RiotApi("60ddd5a6-8e52-4430-a4c4-3f0d2436f2f1");
+
         League challengers = null;
         try {
             challengers = api.getChallengerLeagues(Region.EUW, QueueType.RANKED_SOLO_5x5);
         } catch (RiotApiException e) {
-            System.out.println("Exception. Unable to get challenger list for NA.");
+            System.out.println("Exception. Unable to get challenger list for EUW.");
         }
 
         for (int i = 0; i < challengers.getEntries().size(); i++) {
@@ -78,12 +79,12 @@ public class Challengers {
 
     public static void getChallengerKR(Collection<JsonObject> collections) {
 
-        RiotApi api = new RiotApi("http://store.steampowered.com/news/14585/");
+        RiotApi api = new RiotApi("fd273def-68ff-4754-bf10-b3866983846d3");
         League challengers = null;
         try {
             challengers = api.getChallengerLeagues(Region.KR, QueueType.RANKED_SOLO_5x5);
         } catch (RiotApiException e) {
-            System.out.println("Exception. Unable to get challenger list for NA.");
+            System.out.println("Exception. Unable to get challenger list for KR.");
         }
 
         for (int i = 0; i < challengers.getEntries().size(); i++) {
